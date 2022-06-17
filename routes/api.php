@@ -13,3 +13,5 @@ use App\Http\Controllers\UserApiController;
 Route::get('/user/{id?}', [UserApiController::class, 'userGet']);
 //Post Method
 Route::post('/add-user',[UserApiController::class,'addUser']);
+//Add multiplae user
+Route::post('/add-multi-data',[UserApiController::class,'addMultiUser']);
