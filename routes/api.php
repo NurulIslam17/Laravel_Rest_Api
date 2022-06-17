@@ -11,3 +11,5 @@ use App\Http\Controllers\UserApiController;
 
 //get user api
 Route::get('/user/{id?}', [UserApiController::class, 'userGet']);
+//Post Method
+Route::post('/add-user',[UserApiController::class,'addUser']);
