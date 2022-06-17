@@ -10,4 +10,4 @@ use App\Http\Controllers\UserApiController;
 // });
 
 //get user api
-//Route::get('/user/{id?}', [UserApiController::class, 'userGet']);
+Route::get('/user/{id?}', [UserApiController::class, 'userGet']);
