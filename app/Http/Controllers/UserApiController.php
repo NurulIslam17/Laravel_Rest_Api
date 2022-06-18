@@ -52,7 +52,7 @@ class UserApiController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
             $msg = 'User added successfully';
-            return response()->json(['message' => $msg]);
+            return response()->json(['message' => $msg], 200);
         }
     }
 
@@ -92,6 +92,36 @@ class UserApiController extends Controller
             }
             $massage = 'Users added Successfully';
             return response()->json(['msg' => $massage], 201);
+        }
+    }
+
+    //update user
+    public function updateUser(Request $request, $id)
+    {
+        if ($request->isMethod('put')) {
+            $data = $request->all();
+
+            $rules = [
+                'name' => 'required',
+                'password' => 'required'
+            ];
+
+            $errMsg = [
+                'name.required' => 'Enter the name',
+                'password.required' => 'Enter the password',
+            ];
+
+            $valid = Validator::make($data, $rules, $errMsg);
+            if ($valid->fails()) {
+                return response()->json($valid->errors(), 422);
+            }
+
+            $user = User::findOrFail($id);
+            $user->name = $request->name;
+            $user->password = bcrypt($request->password);
+            $user->save();
+            $update = 'User Updated Successfully.';
+            return response()->json(['msg' => $update],200);
         }
     }
 }

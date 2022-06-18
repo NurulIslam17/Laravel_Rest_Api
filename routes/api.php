@@ -15,3 +15,5 @@ Route::get('/user/{id?}', [UserApiController::class, 'userGet']);
 Route::post('/add-user',[UserApiController::class,'addUser']);
 //Add multiplae user
 Route::post('/add-multi-data',[UserApiController::class,'addMultiUser']);
+//put method for upate user
+Route::put('/user-update/{id}',[UserApiController::class,'updateUser']);
