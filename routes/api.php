@@ -17,3 +17,6 @@ Route::post('/add-user',[UserApiController::class,'addUser']);
 Route::post('/add-multi-data',[UserApiController::class,'addMultiUser']);
 //put method for upate user
 Route::put('/user-update/{id}',[UserApiController::class,'updateUser']);
+
+//patch api update single record
+Route::patch('/update-single/{id}',[UserApiController::class,'updateSingle']);

@@ -19,7 +19,6 @@ class UserApiController extends Controller
             return response()->json(['user' => $user], 200);
         }
     }
-
     // add user
     public function addUser(Request $request)
     {
@@ -55,7 +54,6 @@ class UserApiController extends Controller
             return response()->json(['message' => $msg], 200);
         }
     }
-
     //add multi user
     public function addMultiUser(Request $request)
     {
@@ -94,7 +92,6 @@ class UserApiController extends Controller
             return response()->json(['msg' => $massage], 201);
         }
     }
-
     //update user
     public function updateUser(Request $request, $id)
     {
@@ -122,6 +119,33 @@ class UserApiController extends Controller
             $user->save();
             $update = 'User Updated Successfully.';
             return response()->json(['msg' => $update],200);
+        }
+    }
+    //update Single
+    public function updateSingle(Request $request,$id)
+    {
+        if($request->isMethod('patch'))
+        {
+            $data = $request->all();
+            $rules = [
+                'name'=>'required'
+            ];
+            $errMasg = [
+                'name.required'=>'Enter the name'
+            ];
+
+            $validtor = Validator::make($data,$rules,$errMasg);
+
+            if($validtor->fails())
+            {
+                return response()->json($validtor->errors(),422);
+            }
+
+            $user = User::find($id);
+            $user->name = $request->name;
+            $user->save();
+            $msg ='Updated single data';
+            return response()->json(['msg'=>$msg],200);
         }
     }
 }
