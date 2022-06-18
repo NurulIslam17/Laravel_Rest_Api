@@ -147,16 +147,27 @@ class UserApiController extends Controller
         }
     }
     //delete single Data
-    public function deleteData($id = null)
+    public function deleteData(Request $request, $id = null)
     {
-        if ($id == '') {
-            $msg = 'Nothing to delete. Please select the ID';
-            return response()->json(['msg' => $msg], 200);
+        $header = $request->header('AuthDelete'); // jwt authentication 
+        if ($header == '') {
+            $delMsg = 'Authentication required';
+            return response()->json(['msg' => $delMsg], 422);
         } else {
-            $user = User::find($id);
-            $user->delete();
-            $delMsg = 'Data deleted successfully';
-            return response()->json(['msg' => $delMsg], 200);
+            if ($header == 'eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik51cnVsIElzbGFtIiwiaWF0IjoxNTE2MjM5MDIyfQ') {
+                if ($id == '') {
+                    $msg = 'Nothing to delete. Please select the ID';
+                    return response()->json(['msg' => $msg], 200);
+                } else {
+                    $user = User::find($id);
+                    $user->delete();
+                    $delMsg = 'Data deleted successfully';
+                    return response()->json(['msg' => $delMsg], 200);
+                }
+            } else {
+                $delMsg = 'Authentication Does not Matched';
+                return response()->json(['msg' => $delMsg], 200);
+            }
         }
     }
 }

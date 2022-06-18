@@ -12,14 +12,13 @@ use App\Http\Controllers\UserApiController;
 //get user api
 Route::get('/user/{id?}', [UserApiController::class, 'userGet']);
 //Post Method
-Route::post('/add-user',[UserApiController::class,'addUser']);
+Route::post('/add-user', [UserApiController::class, 'addUser']);
 //Add multiplae user
-Route::post('/add-multi-data',[UserApiController::class,'addMultiUser']);
+Route::post('/add-multi-data', [UserApiController::class, 'addMultiUser']);
 //put method for upate user
-Route::put('/user-update/{id}',[UserApiController::class,'updateUser']);
-
+Route::put('/user-update/{id}', [UserApiController::class, 'updateUser']);
 //patch api update single record
-Route::patch('/update-single/{id}',[UserApiController::class,'updateSingle']);
-
+Route::patch('/update-single/{id}', [UserApiController::class, 'updateSingle']);
 //delete data
-Route::delete('/delete-data/{id?}',[UserApiController::class,'deleteData']);
+Route::delete('/delete-data/{id?}', [UserApiController::class, 'deleteData']);
+
