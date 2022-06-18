@@ -20,3 +20,6 @@ Route::put('/user-update/{id}',[UserApiController::class,'updateUser']);
 
 //patch api update single record
 Route::patch('/update-single/{id}',[UserApiController::class,'updateSingle']);
+
+//delete data
+Route::delete('/delete-data/{id?}',[UserApiController::class,'deleteData']);

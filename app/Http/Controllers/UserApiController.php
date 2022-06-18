@@ -118,34 +118,45 @@ class UserApiController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
             $update = 'User Updated Successfully.';
-            return response()->json(['msg' => $update],200);
+            return response()->json(['msg' => $update], 200);
         }
     }
     //update Single
-    public function updateSingle(Request $request,$id)
+    public function updateSingle(Request $request, $id)
     {
-        if($request->isMethod('patch'))
-        {
+        if ($request->isMethod('patch')) {
             $data = $request->all();
             $rules = [
-                'name'=>'required'
+                'name' => 'required'
             ];
             $errMasg = [
-                'name.required'=>'Enter the name'
+                'name.required' => 'Enter the name'
             ];
 
-            $validtor = Validator::make($data,$rules,$errMasg);
+            $validtor = Validator::make($data, $rules, $errMasg);
 
-            if($validtor->fails())
-            {
-                return response()->json($validtor->errors(),422);
+            if ($validtor->fails()) {
+                return response()->json($validtor->errors(), 422);
             }
 
             $user = User::find($id);
             $user->name = $request->name;
             $user->save();
-            $msg ='Updated single data';
-            return response()->json(['msg'=>$msg],200);
+            $msg = 'Updated single data';
+            return response()->json(['msg' => $msg], 200);
+        }
+    }
+    //delete single Data
+    public function deleteData($id = null)
+    {
+        if ($id == '') {
+            $msg = 'Nothing to delete. Please select the ID';
+            return response()->json(['msg' => $msg], 200);
+        } else {
+            $user = User::find($id);
+            $user->delete();
+            $delMsg = 'Data deleted successfully';
+            return response()->json(['msg' => $delMsg], 200);
         }
     }
 }
